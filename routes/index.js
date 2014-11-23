@@ -1,6 +1,7 @@
 var express = require('express'),
     router = express.Router(),
     moment = require('moment'),
+    settings = require('../settings'),
     trip = require('../controllers/TripController')(),
     bus = require('../controllers/BusController')();
 
@@ -16,6 +17,35 @@ router.get('/trip', function(req, res) {
 });*/
 
 router.get('/bus', function(req, res) {
+
+    var token = req.query.token;
+
+    if (settings.slackToken == token) {
+        var busNumber = req.query.text || '4';
+
+        console.log(busNumber);
+
+        bus.getBus(busNumber, function(err, item) {
+            if (err) {
+                res.send("Ett fel uppstod");
+                console.log("Error", err);
+            } else if (item) {
+                var time = moment(item.ExpectedDateTime);
+                res.send("Nästa buss linje " + item.LineNumber + " avgår om " + item.MinutesLeft + (item.MinutesLeft > 1 ? " minuter" : " minut") + " (" + time.format("HH:mm") + ")");
+            } else {
+                res.send('');
+            }
+
+        });
+    } else {
+        res.render('error', {
+            message: 'No access',
+            error: {}
+        });
+    }
+});
+/*
+router.post('/bus', function(req, res) {
 
     var busNumber = req.query.bus || '4';
 
@@ -33,6 +63,6 @@ router.get('/bus', function(req, res) {
         }
 
     });
-});
+});*/
 
 module.exports = router;
