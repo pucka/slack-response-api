@@ -25,18 +25,24 @@ router.get('/bus', function(req, res) {
 
         console.log(busNumber);
 
-        bus.getBus(busNumber, function(err, item) {
-            if (err) {
-                res.send("Ett fel uppstod");
-                console.log("Error", err);
-            } else if (item) {
-                var time = moment(item.ExpectedDateTime);
-                res.send("Nästa buss linje " + item.LineNumber + " avgår om " + item.MinutesLeft + (item.MinutesLeft > 1 ? " minuter" : " minut") + " (" + time.format("HH:mm") + ")");
-            } else {
-                res.send('');
-            }
+        if (['4', '56', '42', 'alla', 'all'].indexOf(busNumber) > -1) {
+            bus.getBus(busNumber, function(err, item) {
+                if (err) {
+                    res.send("Ett fel uppstod");
+                    console.log("Error", err);
+                } else if (item) {
+                    var time = moment(item.ExpectedDateTime);
+                    res.send("Nästa buss linje " + item.LineNumber + " avgår om " + item.MinutesLeft + (item.MinutesLeft > 1 ? " minuter" : " minut") + " (" + time.format("HH:mm") + ")");
+                } else {
+                    res.send('');
+                }
 
-        });
+            });
+        } else {
+            res.send('Du kan endast söka på busslinjerna 4, 42 och 56. Skriver du "/buss alla" så söker du på alla tre busslinjer.');
+        }
+
+
     } else {
         res.render('error', {
             message: 'No access',

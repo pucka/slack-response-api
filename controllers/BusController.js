@@ -26,7 +26,7 @@ module.exports = function() {
                     if (resJson && resJson.ResponseData) {
                         var resp = resJson.ResponseData;
                         resp.Buses.every(function(item) {
-                            if (item.LineNumber == busNumber || busNumber == 'all') {
+                            if (item.LineNumber == busNumber || ['alla', 'all'].indexOf(busNumber) > -1) {
 
                                 var timeLeft = moment(item.ExpectedDateTime).diff(moment(new Date()));
                                 var d = moment.duration(timeLeft).asMinutes();
