@@ -26,7 +26,6 @@ router.get('/bus', function(req, res) {
             res.send("Ett fel uppstod");
             console.log("Error", err);
         } else if (item) {
-            console.log(item);
             var time = moment(item.ExpectedDateTime);
             res.send("Nästa buss linje " + item.LineNumber + " avgår om " + item.MinutesLeft + (item.MinutesLeft > 1 ? " minuter" : " minut") + " (" + time.format("HH:mm") + ")");
         } else {

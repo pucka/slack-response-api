@@ -22,12 +22,10 @@ module.exports = function() {
         getBus: function(busNumber, cb) {
 
             fetchData(API_URL, function(err, resJson) {
-                console.log(resJson);
                 if(!err) {
                     if (resJson && resJson.ResponseData) {
                         var resp = resJson.ResponseData;
                         resp.Buses.every(function(item) {
-                            console.log('bus', item, item.LineNumber);
                             if (item.LineNumber == busNumber || busNumber == 'all') {
 
                                 var timeLeft = moment(item.ExpectedDateTime).diff(moment(new Date()));
