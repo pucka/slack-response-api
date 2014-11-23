@@ -32,7 +32,7 @@ router.get('/bus', function(req, res) {
                     console.log("Error", err);
                 } else if (item) {
                     var time = moment(item.ExpectedDateTime);
-                    res.send("Nästa buss linje " + item.LineNumber + " avgår om " + item.MinutesLeft + (item.MinutesLeft > 1 ? " minuter" : " minut") + " (" + time.format("HH:mm") + ")");
+                    res.send("Nästa buss linje " + item.LineNumber + " avgår från Radiohuset om " + item.MinutesLeft + (item.MinutesLeft > 1 ? " minuter" : " minut") + " (" + time.format("HH:mm") + ")");
                 } else {
                     res.send('');
                 }
