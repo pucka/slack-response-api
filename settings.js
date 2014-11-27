@@ -4,5 +4,5 @@ module.exports = {
     "realTimeAPIKey": "862558531b344a30806fbf42d1fa2690",
     "snusketAPIKey": "9a1df3651e119372b46e4d947a01d3d9",
     "slackTokenBuss": "PQ5tKALRfwArN1536Zs5RrM7",
-    "slackTokenSnusket": ""
+    "slackTokenSnusket": "gJ4BfAgos6FzW6LYWYDKE7DF"
 };
