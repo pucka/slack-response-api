@@ -28,15 +28,14 @@ var fetchData = function(url, cb) {
 
 module.exports = function() {
     return {
-        getRoute: function(from, to) {
-            /*getStationFromAPI(name).on('end', function(response) {
-                console.log('response', response.toJSON());
-            })*/
+        getRoute: function(from, to, cb) {
 
             var urlFrom = API_URL.replace("{search}", from),
                 urlTo = API_URL.replace("{search}", to);
 
-            async.series([
+
+            //fetch station ids
+            /*async.series([
                     function(callback){
                         fetchData(urlFrom, callback);
                     },
@@ -44,11 +43,16 @@ module.exports = function() {
                         fetchData(urlTo, callback);
                     }
                 ],
-                // optional callback
                 function(err, results){
                     console.log('results',results[0].ResponseData[0].SiteId, results[1].ResponseData[0].SiteId);
+                    if (!err) {
+                        var siteIdFrom = results[0].ResponseData[0].SiteId,
+                            siteIdTo = results[1].ResponseData[0].SiteId;
+
+
+                    }
                 }
-            );
+            );*/
 
             /*async.map(["file1", "file2", "file3"], fetch, function(err, results){
                 if ( err){

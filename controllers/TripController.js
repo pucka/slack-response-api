@@ -24,6 +24,11 @@ module.exports = function() {
 
             fetchData(urlTrip, function(err, resJson) {
                 console.log(resJson);
+                if(!err) {
+                    if (resJson && resJson.TripList) {
+
+                    }
+                }
            });
             //fetch station ids
             /*async.series([

@@ -32,7 +32,7 @@ module.exports = function() {
                                 var d = moment.duration(timeLeft).asMinutes();
 
                                 if (d >= 1) {
-                                    item.MinutesLeft = Math.floor(d);
+                                    item.MinutesLeft = Math.ceil(d);
                                     cb(null, item);
                                     return false;
                                 }
